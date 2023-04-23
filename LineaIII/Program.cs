@@ -1,5 +1,7 @@
 using System.Text;
+using LineaIII.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 
@@ -27,6 +29,9 @@ builder.Services.AddAuthentication(config => {
         ValidateAudience = false
     };
 });
+
+builder.Services.AddDbContext<DBContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("BloggingDatabase")));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
