@@ -31,7 +31,7 @@ builder.Services.AddAuthentication(config => {
 });
 
 builder.Services.AddDbContext<DBContext>(options =>
-options.UseSqlServer(builder.Configuration.GetConnectionString("BloggingDatabase")));
+options.UseSqlServer(builder.Configuration.GetConnectionString("Conexion")));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

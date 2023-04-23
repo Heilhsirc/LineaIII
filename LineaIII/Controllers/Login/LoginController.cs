@@ -4,11 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 namespace LineaIII.Controllers.Login
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [Authorize]
     public class LoginController : ControllerBase
     {
-        [HttpGet(Name = "Login")]
+        
+        [HttpGet]
+        [Route("Login")]
         public IActionResult login()
         {
             return Ok("Ya estoy funcionando");
