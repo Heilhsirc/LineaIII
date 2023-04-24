@@ -12,11 +12,14 @@ namespace LineaIII.Data
             : base(options) { }
 
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Curso> Curso { get; set; }
+        public DbSet<Alumno> Alumno { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Usuario>();
+            modelBuilder.Entity<Curso>();
            // modelBuilder.Entity<Administrador>();
             //modelBuilder.Entity<Cita>();
 

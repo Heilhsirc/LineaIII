@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LineaIII.Modelo
 {
-    [Table(name:"USUARIO")]
+    [Table(name: "USUARIO")]
     public class Usuario
     {
         private int id;
