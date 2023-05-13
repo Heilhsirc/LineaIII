@@ -30,6 +30,17 @@ builder.Services.AddAuthentication(config => {
     };
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("Politica",
+                      policy =>
+                      {
+                          policy.AllowAnyOrigin()
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
+                      });
+});
+
 builder.Services.AddDbContext<DBContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("Conexion")));
 
@@ -46,6 +57,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("Politica");
 
 app.UseHttpsRedirection();
 

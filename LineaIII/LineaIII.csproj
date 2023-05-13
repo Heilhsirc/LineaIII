@@ -7,16 +7,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\Alumno\**" />
+    <Compile Remove="Controllers\Curso\**" />
+    <Content Remove="Controllers\Alumno\**" />
+    <Content Remove="Controllers\Curso\**" />
+    <EmbeddedResource Remove="Controllers\Alumno\**" />
+    <EmbeddedResource Remove="Controllers\Curso\**" />
+    <None Remove="Controllers\Alumno\**" />
+    <None Remove="Controllers\Curso\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.14" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.16" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.16" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.27.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\Curso\" />
-    <Folder Include="Controllers\Alumno\" />
   </ItemGroup>
 
 </Project>

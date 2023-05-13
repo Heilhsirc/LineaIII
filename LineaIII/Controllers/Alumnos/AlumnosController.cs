@@ -1,10 +1,14 @@
 ﻿using LineaIII.Data;
 using LineaIII.Modelo;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace LineaIII.Controllers.Alumnos
 {
+    [ApiController]
+    [Route("api/[controller]")]
+    [Authorize]
     public class AlumnosController : Controller
     {
         private readonly DBContext _context;
