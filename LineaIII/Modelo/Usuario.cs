@@ -31,4 +31,11 @@ namespace LineaIII.Modelo
         [Column("ROLID")]
         public int Rolid { get => rolid; set => rolid = value; }
     }
+
+    public class RecuperarRequest
+    {
+        private string correo;
+
+        public string Correo { get => correo; set => correo = value; }
+    }
 }

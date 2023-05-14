@@ -36,7 +36,8 @@ namespace LineaIII.Controllers.JWT
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = claims,
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(keyBytes), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(keyBytes), SecurityAlgorithms.HmacSha256Signature),
+                Expires = DateTime.UtcNow.AddDays(1)
             };
 
             var tokenHandler = new JwtSecurityTokenHandler();
