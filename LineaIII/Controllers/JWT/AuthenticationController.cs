@@ -65,7 +65,27 @@ namespace LineaIII.Controllers.JWT
                 }
                 else
                 {
-                    return BadRequest();
+                    reg.UsuarioId=user.Id;
+                
+                    _context.Security.Add(reg);
+                    _context.SaveChanges();
+                    var response = (from u in _context.Usuarios
+                                    join s in _context.Security on u.Id equals s.UsuarioId
+
+                                    where u.Id == user.Id
+
+                                    select new
+                                    {
+                                        u.Id,
+                                        u.Username,
+                                        u.Password,
+                                        u.Email,
+                                        u.Nombre,
+                                        u.Rolid,
+                                        s.Token
+
+                                    });
+                    return Ok(response);
                 }
             }
             else

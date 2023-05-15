@@ -85,7 +85,7 @@ namespace LineaIII.Controllers.Login
 
                     var client = new SmtpClient("smtp-mail.outlook.com", 587)
                     {
-                        EnableSsl = true,
+                        EnableSsl = false,
                         Credentials = new NetworkCredential(mail, pw)
                     };
 

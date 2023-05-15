@@ -15,6 +15,7 @@ namespace LineaIII.Data
         public DbSet<Curso> Curso { get; set; }
         public DbSet<Alumno> Alumno { get; set; }
         public DbSet<Security> Security { get; set; }
+        public DbSet<Tabcxa> Tabcxa { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -22,6 +23,7 @@ namespace LineaIII.Data
             modelBuilder.Entity<Curso>();
             modelBuilder.Entity<Alumno>();
             modelBuilder.Entity<Security>();
+            modelBuilder.Entity<Tabcxa>();
 
         }
     }
