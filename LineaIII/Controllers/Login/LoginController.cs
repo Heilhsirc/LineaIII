@@ -80,31 +80,14 @@ namespace LineaIII.Controllers.Login
             {
                 try
                 {
-                    var mail = "moshimio@hotmail.com";
-                    var pw = "Cris1998";
-
-                    var client = new SmtpClient("smtp-mail.outlook.com", 587)
-                    {
-                        EnableSsl = false,
-                        Credentials = new NetworkCredential(mail, pw)
-                    };
-
-                    client.SendMailAsync(new MailMessage(
-                        from: mail,
-                        to: email.Correo,
-                        "SYSTEM",
-                        "Hola, " + user.Nombre + "\nHas solicitado recuperar tus datos de ingreso\n" +
-                      "Tu contrasenia es: " + user.Password +
-                      "\nNo olvides cambiar tu contrasenia despues de iniciar sesion."));
-
+                    return Ok(user);
                 }
                 catch (Exception e)
                 {
 
-                    return BadRequest(e.Message);
+                    return BadRequest();
                 }
 
-                return Ok(email);
             }
         }
  

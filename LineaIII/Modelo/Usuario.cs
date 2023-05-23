@@ -17,6 +17,9 @@ namespace LineaIII.Modelo
         private string email;
 
         private int rolid;
+
+        private string celular;
+
         [Key]
         [Column("ID")]
         public int Id { get => id; set => id = value; }
@@ -30,6 +33,8 @@ namespace LineaIII.Modelo
         public string Email { get => email; set => email = value; }
         [Column("ROLID")]
         public int Rolid { get => rolid; set => rolid = value; }
+        [Column("CELULAR")]
+        public string Celular { get => celular; set => celular = value; }
     }
 
     public class RecuperarRequest

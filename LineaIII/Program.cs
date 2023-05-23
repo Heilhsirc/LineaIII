@@ -35,9 +35,9 @@ builder.Services.AddCors(options =>
     options.AddPolicy("Politica",
                       policy =>
                       {
-                          policy.AllowAnyOrigin()
-                          .AllowAnyHeader()
-                          .AllowAnyMethod();
+                          policy.WithOrigins("https://hyslinea3prof.tech:8082");
+                          policy.WithHeaders("content-type", "content-security-policy", "authorization", "Access-Control-Allow-Methods");
+                          policy.WithMethods("PUT", "DELETE", "GET","POST");
                       });
 });
 

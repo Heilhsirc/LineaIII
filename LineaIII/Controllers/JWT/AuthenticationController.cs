@@ -44,7 +44,8 @@ namespace LineaIII.Controllers.JWT
             var tokenConfig = tokenHandler.CreateToken(tokenDescriptor);
 
             string token = tokenHandler.WriteToken(tokenConfig);
-            Security reg = _context.Security.FirstOrDefault(x => x.UsuarioId == user.Id);
+
+                Security reg = _context.Security.FirstOrDefault(x => x.UsuarioId == user.Id);
                 if (reg!=null)
                 {
                     reg.Token = token;
@@ -52,12 +53,13 @@ namespace LineaIII.Controllers.JWT
                     _context.SaveChanges();
                     var response = (from u in _context.Usuarios
                              join s in _context.Security on u.Id equals s.UsuarioId
+                             join r in _context.Rols on u.Rolid equals r.Id
 
                              where u.Id == user.Id
 
                              select new
                              {
-                                u.Id, u.Username, u.Password, u.Email,u.Nombre,u.Rolid, s.Token
+                                u.Id, u.Username, u.Password, u.Email,u.Nombre,r.Role, s.Token
 
                              });
 
@@ -65,12 +67,15 @@ namespace LineaIII.Controllers.JWT
                 }
                 else
                 {
-                    reg.UsuarioId=user.Id;
+                    Security rege = new Security();
+                    rege.UsuarioId=user.Id;
+                    rege.Token=token;
                 
-                    _context.Security.Add(reg);
+                    _context.Security.Add(rege);
                     _context.SaveChanges();
                     var response = (from u in _context.Usuarios
                                     join s in _context.Security on u.Id equals s.UsuarioId
+                                    join r in _context.Rols on u.Rolid equals r.Id
 
                                     where u.Id == user.Id
 
@@ -81,7 +86,7 @@ namespace LineaIII.Controllers.JWT
                                         u.Password,
                                         u.Email,
                                         u.Nombre,
-                                        u.Rolid,
+                                        r.Role,
                                         s.Token
 
                                     });

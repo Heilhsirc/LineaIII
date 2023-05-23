@@ -24,13 +24,16 @@ namespace LineaIII.Controllers.Alumnos
             return Ok(_context.Alumno.ToList());
         }
         [HttpGet]
-        [Route("Buscar")]
-        public IActionResult buscar([FromBody] Alumno alumno)
+        [Route("Buscar/{id}")]
+        public IActionResult buscar([FromRoute] int id)
         {
-            Alumno alumnoB = _context.Alumno.Where(u => u.Id == alumno.Id).FirstOrDefault();
+            Alumno alumnoB = _context.Alumno.Where(u => u.Id == id).FirstOrDefault();
             if (alumnoB == null)
             {
-                return Ok("Alumno no existe");
+                Response message = new Response();
+                message.Message = "Alumno no existe";
+                message.Id = 4;
+                return BadRequest(message);
             }
             else
             {
@@ -45,7 +48,10 @@ namespace LineaIII.Controllers.Alumnos
             Alumno alumnoM = _context.Alumno.Where(u => u.Id == alumno.Id).FirstOrDefault();
             if (alumnoM == null)
             {
-                return Ok("Alumno no existe");
+                Response message = new Response();
+                message.Message = "Alumno no existe";
+                message.Id = 4;
+                return BadRequest(message);
             }
             else
             {
@@ -62,14 +68,43 @@ namespace LineaIII.Controllers.Alumnos
         [Route("Agregar")]
         public IActionResult add(Alumno alumno)
         {
-            Alumno alumnoA = _context.Alumno.FirstOrDefault(x => x.Id == alumno.Id);
-            if (alumnoA != null)
+            Alumno alumnoA = _context.Alumno.FirstOrDefault(x => x.Nif.Equals(alumno.Nif));
+            Response response = new Response();
+            if (alumnoA == null)
             {
-                return Ok();
+                _context.Alumno.Add(alumno);
+                _context.SaveChanges();
+                response.Message = "Alumno agregado correctamente";
+                response.Id = 2;
+                return Ok(response);
             }
             else
             {
-                return Ok("Alumno no encontrado");
+                response.Message = "Error al agregar, el nif ya esta registrado";
+                response.Id = 1;
+                return BadRequest(response);
+            }
+        }
+
+        [HttpDelete]
+        [Route("Eliminar/{id}")]
+        public IActionResult eliminar([FromRoute] int id)
+        {
+            Response response = new Response();
+            Alumno alumnoE = _context.Alumno.FirstOrDefault(c => c.Id == id);
+            if (alumnoE != null)
+            {
+                _context.Alumno.Remove(alumnoE);
+                _context.SaveChanges();
+                response.Message = "Alumno eliminado correctamente";
+                response.Id = 3;
+                return Ok(response);
+            }
+            else
+            {
+                response.Message = "Error al eliminar el alumno";
+                response.Id = 4;
+                return BadRequest(response);
             }
         }
     }

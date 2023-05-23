@@ -60,15 +60,31 @@ namespace LineaIII.Controllers.Usuarios
         [Route("Agregar")]
         public IActionResult add(Usuario user)
         {
-            Usuario usuario = _context.Usuarios.FirstOrDefault(x => x.Id == user.Id);
-            if (usuario != null)
+            try
             {
-                return Ok();
+                Usuario usuarioA = _context.Usuarios.FirstOrDefault(x => x.Username.Equals(user.Username));
+                Response response = new Response();
+                if (usuarioA == null)
+                {
+                    _context.Usuarios.Add(user);
+                    _context.SaveChanges();
+                    response.Message = "Usuario agregado correctamente";
+                    response.Id = 2;
+                    return Ok(response);
+                }
+                else
+                {
+                    response.Message = "Error al agregar, username ya esta en uso";
+                    response.Id = 1;
+                    return BadRequest(response);
+                }
             }
-            else
+            catch (Exception)
             {
-                return Ok("Usuario no encontrado");
+
+                throw;
             }
+            
         }
     }
 }

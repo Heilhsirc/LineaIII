@@ -16,6 +16,7 @@ namespace LineaIII.Data
         public DbSet<Alumno> Alumno { get; set; }
         public DbSet<Security> Security { get; set; }
         public DbSet<Tabcxa> Tabcxa { get; set; }
+        public DbSet<Rol> Rols { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

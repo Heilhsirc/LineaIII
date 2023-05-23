@@ -28,7 +28,7 @@ namespace LineaIII.Controllers.Cursos
             Curso cursoB = _context.Curso.Where(u => u.Id == id).FirstOrDefault();
             if (cursoB == null)
             {
-                return Ok("Usuario no existe");
+                return Ok("Curso no existe");
             }
             else
             {
@@ -66,7 +66,8 @@ namespace LineaIII.Controllers.Cursos
         public IActionResult add(Curso curso)
         {
             Response response = new Response();
-            if (curso != null)
+            Curso cursoA = _context.Curso.FirstOrDefault(x => x.Codigo.Equals(curso.Codigo));
+            if (cursoA == null)
             {
                 _context.Curso.Add(curso);
                 _context.SaveChanges();
@@ -76,9 +77,9 @@ namespace LineaIII.Controllers.Cursos
             }
             else
             {
-                response.Message = "Error al agregar el curso";
+                response.Message = "Error al agregar el curso, el codigo del curso ya esta registrado";
                 response.Id = 1;
-                return Ok(response);
+                return BadRequest(response);
             }
         }
 
